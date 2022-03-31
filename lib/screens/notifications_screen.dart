@@ -15,7 +15,12 @@ class NotificationsScreen extends StatelessWidget {
             children: const [
               NotificationCard(
                 message:
-                    "¿Ya visitaste El callejon del aguacate?, ¡esta muy cerca de ti!",
+                    "Recibiste una recompensa por escanear el código QR de Vallejo-i",
+                image: "assets/icons/gift.png",
+              ),
+              NotificationCard(
+                message:
+                    "¿Ya visitaste el Monumento al Arqueólogo José Antonio Urdapilleta Pérez?, ¡esta muy cerca de ti!",
                 image: "assets/icons/place.png",
               ),
               NotificationCard(
@@ -25,13 +30,18 @@ class NotificationsScreen extends StatelessWidget {
               ),
               NotificationCard(
                 message:
-                    "Recibiste una recompensa por subir de nivel: 10% de descuento en tu próxima visita al Sumoaya",
+                    "Recibiste una recompensa por subir de nivel: ¡10% de descuento en tu próxima visita al Sumoaya!",
                 image: "assets/icons/gift.png",
               ),
               NotificationCard(
                 message:
                     "!Recuerda utilizar las recompensas que ganas durante tu exploración de la CDMX!",
                 image: "assets/icons/notification.png",
+              ),
+              NotificationCard(
+                message:
+                    "Recibiste una recompensa por subir escanear 120 codigos QR: ¡Nuevo avatar desbloqueado!",
+                image: "assets/icons/gift.png",
               ),
             ],
           ),

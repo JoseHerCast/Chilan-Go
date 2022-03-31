@@ -61,7 +61,7 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
             color: MyColors.white,
           ),
           Icon(
-            Icons.person,
+            Icons.settings,
             size: 35,
             color: MyColors.white,
           ),

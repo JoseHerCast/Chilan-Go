@@ -24,8 +24,7 @@ class PlaceDetailScreen extends StatelessWidget {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: MyColors.mainBlue,
-          title:
-              const Text('INTERESTS', style: TextStyle(color: MyColors.white)),
+          title: const Text("Lugares", style: TextStyle(color: MyColors.white)),
           centerTitle: true,
           actions: [
             IconButton(

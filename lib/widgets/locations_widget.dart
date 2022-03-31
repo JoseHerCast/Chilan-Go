@@ -27,11 +27,11 @@ class _LocationsWidgetState extends State<LocationsWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconProgress(
-                    value: '35',
+                    value: '9',
                     iconPath: 'assets/icons/trophy.png',
                   ),
                   IconProgress(
-                    value: '1,507',
+                    value: '725',
                     iconPath: 'assets/icons/bag.png',
                   )
                 ],

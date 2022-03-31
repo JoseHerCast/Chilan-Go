@@ -25,11 +25,11 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconProgress(
-                  value: '35',
+                  value: '9',
                   iconPath: 'assets/icons/trophy.png',
                 ),
                 IconProgress(
-                  value: '1,507',
+                  value: '725',
                   iconPath: 'assets/icons/bag.png',
                 )
               ],
@@ -38,7 +38,7 @@ class HomePage extends StatelessWidget {
           /*Nivel y progreso*/
           LevelProgressCard(
             size: size,
-            lv: 28,
+            lv: 2,
           ),
           /*Nombre de usuario*/
           Container(
@@ -46,7 +46,7 @@ class HomePage extends StatelessWidget {
             //color: Colors.grey,
             child: Center(
               child: Text(
-                "Gaby",
+                "Gabs Segura",
                 style: TextStyle(
                   color: MyColors.mainText,
                   fontSize: 28,
@@ -63,7 +63,7 @@ class HomePage extends StatelessWidget {
             //color: Colors.grey,
             child: Center(
               child: Text(
-                "Rango: Garibaldi",
+                "Rango: FORANEO",
                 style: TextStyle(
                   color: MyColors.mainText,
                   fontSize: 22,
