@@ -2,6 +2,7 @@ import 'package:animated_login/animated_login.dart';
 import 'package:app/style/my_colors.dart';
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../widgets/dialog_builders.dart';
 import '../widgets/login_functions.dart';
@@ -20,43 +21,78 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   LanguageOption language = _languageOptions[1];
 
+  String _disclaimer =
+      "Te invitamos a visitar nuestro aviso de privacidad en www.avisodeprivacidad.com";
+
   /// Current auth mode, default is [AuthMode.login].
   AuthMode currentMode = AuthMode.login;
 
   CancelableOperation? _operation;
   @override
   Widget build(BuildContext context) {
-    return AnimatedLogin(
-      onLogin: (LoginData data) async =>
-          _authOperation(LoginFunctions(context).onLogin(data), 'login'),
-      onSignup: (SignUpData data) async =>
-          _authOperation(LoginFunctions(context).onSignup(data), 'signup'),
-      onForgotPassword: _onForgotPassword,
-      logo: Image.asset(
-        'assets/images/logo_ajolote_2.png',
-      ),
-      // backgroundImage: 'images/background_image.jpg',
-      signUpMode: SignUpModes.both,
-      socialLogins: _socialLogins(context),
-      loginDesktopTheme: _desktopTheme,
-      loginMobileTheme: _mobileTheme,
-      loginTexts: _loginTexts,
-      changeLanguageCallback: (LanguageOption? _language) {
-        if (_language != null) {
-          DialogBuilder(context).showResultDialog(language.code == 'ES'
-              ? 'Successfully changed the language to: ${_language.value}.'
-              : 'Lenguaje cambiado con éxito a: ${_language.value}.');
-          if (mounted) setState(() => language = _language);
-        }
-      },
-      changeLangDefaultOnPressed: () async => _operation?.cancel(),
-      languageOptions: _languageOptions,
-      selectedLanguage: language,
-      initialMode: currentMode,
-      onAuthModeChange: (AuthMode newMode) async {
-        currentMode = newMode;
-        await _operation?.cancel();
-      },
+    return Stack(
+      children: [
+        AnimatedLogin(
+          onLogin: (LoginData data) async =>
+              _authOperation(LoginFunctions(context).onLogin(data), 'login'),
+          onSignup: (SignUpData data) async =>
+              _authOperation(LoginFunctions(context).onSignup(data), 'signup'),
+          onForgotPassword: _onForgotPassword,
+          logo: Image.asset(
+            'assets/images/logo_ajolote_2.png',
+          ),
+          // backgroundImage: 'images/background_image.jpg',
+          signUpMode: SignUpModes.both,
+          socialLogins: _socialLogins(context),
+          loginDesktopTheme: _desktopTheme,
+          loginMobileTheme: _mobileTheme,
+          loginTexts: _loginTexts,
+          changeLanguageCallback: (LanguageOption? _language) {
+            if (_language != null) {
+              DialogBuilder(context).showResultDialog(language.code == 'ES'
+                  ? 'Successfully changed the language to: ${_language.value}.'
+                  : 'Lenguaje cambiado con éxito a: ${_language.value}.');
+              if (mounted) setState(() => language = _language);
+            }
+          },
+          changeLangDefaultOnPressed: () async => _operation?.cancel(),
+          languageOptions: _languageOptions,
+          selectedLanguage: language,
+          initialMode: currentMode,
+          onAuthModeChange: (AuthMode newMode) async {
+            currentMode = newMode;
+            await _operation?.cancel();
+          },
+        ),
+        Center(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 740),
+            child: TextButton(
+                onPressed: () {
+                  Alert(
+                    context: context,
+                    type: AlertType.info,
+                    //title: "Aviso de privacidad",
+                    desc: _disclaimer,
+                    buttons: [
+                      DialogButton(
+                        child: Text(
+                          "Aceptar",
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        ),
+                        onPressed: () => Navigator.pop(context),
+                        width: 120,
+                      )
+                    ],
+                  ).show();
+                },
+                child: Text(
+                  disclaimer,
+                  style: TextStyle(color: MyColors.white),
+                )),
+          ),
+        ),
+      ],
     );
   }
 
@@ -221,6 +257,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   String get _dialogButtonText =>
       language.code == 'ES' ? '_dialogButtonText' : '_dialogButtonText';
+
+  String get disclaimer =>
+      language.code == 'ES' ? 'Aviso de privacidad' : 'Disclaimer';
 
   /// Social login options, you should provide callback function and icon path.
   /// Icon paths should be the full path in the assets

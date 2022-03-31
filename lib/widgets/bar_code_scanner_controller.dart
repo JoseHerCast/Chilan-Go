@@ -1,6 +1,8 @@
+import 'package:app/screens/navigator_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class BarcodeScannerWithController extends StatefulWidget {
   const BarcodeScannerWithController({Key? key}) : super(key: key);
@@ -13,34 +15,61 @@ class BarcodeScannerWithController extends StatefulWidget {
 class _BarcodeScannerWithControllerState
     extends State<BarcodeScannerWithController>
     with SingleTickerProviderStateMixin {
-  String? barcode;
+  String? code;
 
   MobileScannerController controller = MobileScannerController(
-    torchEnabled: true,
-    // formats: [BarcodeFormat.qrCode]
-    // facing: CameraFacing.front,
-  );
+      torchEnabled: false, //deshabilitamos por defecto el flash
+      formats: [BarcodeFormat.qrCode] //Solo se detectaran los codigos QR
+      // facing: CameraFacing.front,
+      );
 
   bool isStarted = true;
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.black,
       body: Builder(builder: (context) {
         return Stack(
           children: [
             MobileScanner(
+                //Widget que controla el scanner del código QR
                 controller: controller,
                 fit: BoxFit.contain,
-                // allowDuplicates: true,
+                //TODO: Cambiar a false para la versión final
+                allowDuplicates:
+                    true, //No se permite realizar el scanneo multiples veces dentro de un periodo de tiempo corto
                 // controller: MobileScannerController(
                 //   torchEnabled: true,
                 //   facing: CameraFacing.front,
                 // ),
-                onDetect: (barcode, args) {
+                onDetect: (code, args) {
                   setState(() {
-                    this.barcode = barcode.rawValue;
+                    //TODO: Aumentar el contador de puntaje acorde a los puntos traidos del
+                    //¡Felicidades!, Has obtenido tantos puntos
+                    Alert(
+                      context: context,
+                      type: AlertType.success,
+                      title: _parser(code.rawValue, "title"),
+                      desc: _parser(code.rawValue, "desc"),
+                      buttons: [
+                        DialogButton(
+                          child: Text(
+                            "Aceptar",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (_) => NavigatorScreen()),
+                            );
+                          },
+                          width: 120,
+                        )
+                      ],
+                    ).show();
+                    this.code = code.rawValue;
                   });
                 }),
             Align(
@@ -89,7 +118,7 @@ class _BarcodeScannerWithControllerState
                         height: 50,
                         child: FittedBox(
                           child: Text(
-                            barcode ?? 'Coloca el código QR',
+                            code ?? 'Coloca el código QR',
                             overflow: TextOverflow.fade,
                             style: Theme.of(context)
                                 .textTheme
@@ -149,5 +178,15 @@ class _BarcodeScannerWithControllerState
         );
       }),
     );
+  }
+
+  String _parser(String? _code, String _property) {
+    String response = "";
+    if (_property == "title") {
+      response = _code!.substring(6, _code.indexOf(';'));
+    } else {
+      response = _code!.substring(_code.indexOf(';') + 6, _code.indexOf(';'));
+    }
+    return response;
   }
 }

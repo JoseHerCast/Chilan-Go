@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
         '/home': (BuildContext context) => const HomePage(),
         '/qrScanner': (BuildContext context) => const QrScanner(),
         '/navigatorScreen': (BuildContext context) => const NavigatorScreen(),
+        //'/navigatorScreen': (BuildContext context) => const NavigatorScreen(),
       },
     );
   }
