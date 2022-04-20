@@ -4,12 +4,14 @@ import 'package:google_fonts/google_fonts.dart';
 
 class IconProgress extends StatelessWidget {
   String value;
+  String type;
   String iconPath;
 
   IconProgress({
     Key? key,
     required this.value,
     required this.iconPath,
+    required this.type,
   }) : super(key: key);
 
   @override
@@ -31,10 +33,8 @@ class IconProgress extends StatelessWidget {
         Container(
           margin: const EdgeInsets.only(left: 20),
           //color: Colors.amber,
-          child: Image.asset(
-            iconPath,
-            scale: 1.5,
-          ),
+          child:
+              type == "back" ? Icon(Icons.backpack) : Icon(Icons.emoji_events),
         )
       ],
     );

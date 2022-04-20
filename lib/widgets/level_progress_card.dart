@@ -16,19 +16,12 @@ class LevelProgressCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: MyColors.cardBg,
-          borderRadius: BorderRadius.circular(60),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: const Offset(0, 2),
-            )
-          ]),
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(60),
+      ),
       width: size.width * 0.8,
-      height: 120,
-      margin: const EdgeInsets.all(10),
+      height: 100,
+      margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
       child: Column(
         children: [
           Container(
@@ -37,9 +30,9 @@ class LevelProgressCard extends StatelessWidget {
             child: Text(
               "Nivel $lv",
               style: TextStyle(
-                  fontSize: 22,
+                  fontSize: 18,
                   fontFamily: GoogleFonts.lato().fontFamily,
-                  color: MyColors.white,
+                  color: MyColors.mainBlue,
                   decoration: TextDecoration.none),
             ),
           ),
@@ -48,32 +41,21 @@ class LevelProgressCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Image.asset(
-                    "assets/icons/passport.png",
-                    scale: 1.5,
-                  ),
-                ),
-                Row(
-                  children: [
-                    Container(
-                      color: MyColors.white,
-                      width: 60,
-                      height: 15,
-                    ),
-                    Container(
-                      color: const Color(0XFF7c7c7c),
-                      width: 40,
-                      height: 15,
-                    ),
-                  ],
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 10),
-                  child: Image.asset(
-                    "assets/icons/suitcase.png",
-                    scale: 1.5,
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Row(
+                    children: [
+                      Container(
+                        color: MyColors.ligthBlue,
+                        width: 30,
+                        height: 12,
+                      ),
+                      Container(
+                        color: MyColors.mainBlue,
+                        width: 270,
+                        height: 12,
+                      ),
+                    ],
                   ),
                 ),
               ],

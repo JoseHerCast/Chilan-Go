@@ -5,8 +5,16 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  int? puntaje;
+  HomePage({Key? key, this.puntaje}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final puntajeInicial = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -25,20 +33,17 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconProgress(
-                  value: '9',
+                  value: '0',
                   iconPath: 'assets/icons/trophy.png',
+                  type: "back",
                 ),
                 IconProgress(
-                  value: '725',
+                  value: '0',
                   iconPath: 'assets/icons/bag.png',
+                  type: "al",
                 )
               ],
             ),
-          ),
-          /*Nivel y progreso*/
-          LevelProgressCard(
-            size: size,
-            lv: 2,
           ),
           /*Nombre de usuario*/
           Container(
@@ -57,13 +62,21 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
+          /*Avatar*/
+          Container(
+            margin: EdgeInsets.all(20),
+            height: size.height * 0.3,
+            child: Image.asset(
+              'assets/images/ajolote.gif',
+            ),
+          ),
           /*Rango*/
           Container(
             margin: EdgeInsets.only(bottom: 20),
             //color: Colors.grey,
             child: Center(
               child: Text(
-                "Rango: FORANEO",
+                "Nomada",
                 style: TextStyle(
                   color: MyColors.mainText,
                   fontSize: 22,
@@ -73,13 +86,10 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          /*Avatar*/
-          Container(
-            margin: EdgeInsets.all(20),
-            height: size.height * 0.3,
-            child: Image.asset(
-              'assets/images/ajolote.gif',
-            ),
+          /*Nivel y progreso*/
+          LevelProgressCard(
+            size: size,
+            lv: 1,
           ),
         ],
       ),

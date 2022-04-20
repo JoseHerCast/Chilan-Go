@@ -1,4 +1,5 @@
 import 'package:app/screens/navigator_screen.dart';
+import 'package:app/screens/scratcher_gift.dart';
 import 'package:app/style/my_colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
   void _onIntroEnd(context) {
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => NavigatorScreen()),
+      MaterialPageRoute(builder: (_) => const ScratcherGift()),
     );
   }
 
@@ -63,7 +64,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       //   ),
       // ),
       globalFooter: Container(
-        color: MyColors.blue,
+        color: MyColors.mainBlue,
         width: double.infinity,
         height: 60,
         child: TextButton(
@@ -127,21 +128,21 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       //rtl: true, // Display as right-to-left
       back: const Icon(
         Icons.arrow_back_ios_rounded,
-        color: MyColors.blue,
+        color: MyColors.mainBlue,
       ),
       skip: const Text('Skip',
           style: TextStyle(
             fontWeight: FontWeight.w600,
-            color: MyColors.blue,
+            color: MyColors.mainBlue,
           )),
       next: const Icon(
         Icons.arrow_forward_ios_rounded,
-        color: MyColors.blue,
+        color: MyColors.mainBlue,
       ),
       done: const Text('¡LISTO!',
           style: TextStyle(
             fontWeight: FontWeight.w600,
-            color: MyColors.blue,
+            color: MyColors.mainBlue,
           )),
       curve: Curves.fastLinearToSlowEaseIn,
       controlsMargin: const EdgeInsets.all(16),
@@ -157,7 +158,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         ),
       ),
       dotsContainerDecorator: const ShapeDecoration(
-        color: MyColors.green,
+        color: MyColors.ligthBlue,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(25.0)),
         ),

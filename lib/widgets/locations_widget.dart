@@ -22,17 +22,19 @@ class _LocationsWidgetState extends State<LocationsWidget> {
             /*Logros y puntaje*/
             Container(
               //color: Colors.green,
-              margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 50),
+              margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 40),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconProgress(
-                    value: '9',
+                    value: '0',
                     iconPath: 'assets/icons/trophy.png',
+                    type: "back",
                   ),
                   IconProgress(
-                    value: '725',
+                    value: '0',
                     iconPath: 'assets/icons/bag.png',
+                    type: "al",
                   )
                 ],
               ),

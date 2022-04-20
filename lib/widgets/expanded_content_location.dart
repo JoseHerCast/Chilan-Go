@@ -17,7 +17,7 @@ class ExpandedContentLoc extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
         decoration: const BoxDecoration(
-          color: MyColors.mainBlue,
+          color: MyColors.secondaryBlue,
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
         padding: const EdgeInsets.all(8),

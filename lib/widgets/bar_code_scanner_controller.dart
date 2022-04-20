@@ -4,6 +4,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
+import '../data/todo.dart';
+
 class BarcodeScannerWithController extends StatefulWidget {
   const BarcodeScannerWithController({Key? key}) : super(key: key);
 
@@ -28,6 +30,9 @@ class _BarcodeScannerWithControllerState
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
+    final Todo todos;
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Builder(builder: (context) {
@@ -39,7 +44,7 @@ class _BarcodeScannerWithControllerState
                 fit: BoxFit.contain,
                 //TODO: Cambiar a false para la versión final
                 allowDuplicates:
-                    true, //No se permite realizar el scanneo multiples veces dentro de un periodo de tiempo corto
+                    false, //No se permite realizar el scanneo multiples veces dentro de un periodo de tiempo corto
                 // controller: MobileScannerController(
                 //   torchEnabled: true,
                 //   facing: CameraFacing.front,
@@ -47,12 +52,15 @@ class _BarcodeScannerWithControllerState
                 onDetect: (code, args) {
                   setState(() {
                     //TODO: Aumentar el contador de puntaje acorde a los puntos traidos del
+                    var puntaje = int.parse(_parser(code.rawValue, "desc"));
                     //¡Felicidades!, Has obtenido tantos puntos
                     Alert(
                       context: context,
                       type: AlertType.success,
                       title: _parser(code.rawValue, "title"),
-                      desc: _parser(code.rawValue, "desc"),
+                      desc: "¡Genial! Has sumado " +
+                          _parser(code.rawValue, "desc") +
+                          " puntos",
                       buttons: [
                         DialogButton(
                           child: Text(
@@ -62,7 +70,7 @@ class _BarcodeScannerWithControllerState
                           onPressed: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (_) => NavigatorScreen()),
+                                  builder: (_) => NavigatorScreen(puntaje: 25)),
                             );
                           },
                           width: 120,
@@ -183,10 +191,9 @@ class _BarcodeScannerWithControllerState
   String _parser(String? _code, String _property) {
     String response = "";
     if (_property == "title") {
-      response = _code!.substring(6, _code.indexOf(';'));
+      return _code!.substring(6, _code.indexOf(';'));
     } else {
-      response = _code!.substring(_code.indexOf(';') + 6, _code.indexOf(';'));
+      return "25";
     }
-    return response;
   }
 }

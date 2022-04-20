@@ -8,9 +8,10 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 class NavigatorScreen extends StatefulWidget {
-  const NavigatorScreen({Key? key}) : super(key: key);
+  const NavigatorScreen({Key? key, int? puntaje}) : super(key: key);
 
   @override
+  // ignore: no_logic_in_create_state
   State<NavigatorScreen> createState() => _NavigatorScreenState();
 }
 
@@ -19,7 +20,7 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
   int indexTap = 0;
   //Arreglo de vistas
   final List<Widget> screensArray = [
-    const HomePage(),
+    HomePage(),
     const PlacesScreen(),
     const QrScanner(),
     const NotificationsScreen(),
